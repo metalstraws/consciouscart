@@ -1,0 +1,12 @@
+{
+  "name": "consciouscart",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "postinstall": "cd node_modules/openfoodfacts-nodejs && yarn install && yarn build"
+  },
+  "dependencies": {
+    "openfoodfacts-nodejs": "git+https://github.com/openfoodfacts/openfoodfacts-nodejs.git"
+  }
+}
