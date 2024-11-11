@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, TextInput, StyleSheet } from "react-native";
+import { Text, View, TextInput, StyleSheet, Button } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
   // }
 
   return (
-    <View style={{flex:1, justifyContent:"center", backgroundColor:"#9bce99"}}>
+    <View style={{flex:1, justifyContent:"center", alignItems:"center", backgroundColor:"#9bce99"}}>
       <View
         style={{
           flexDirection: "row",
@@ -47,6 +47,7 @@ export default function App() {
           onChangeText={setSearchText}
           clearButtonMode="always" // iOS only
         />
+        <Ionicons name="arrow-forward" size={20} color="#666" />
       </View>
     </View>
   );
@@ -61,6 +62,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginHorizontal: 10,
     marginVertical: 8,
+    width: "80%",
   },
   searchInput: {
     flex: 1,
