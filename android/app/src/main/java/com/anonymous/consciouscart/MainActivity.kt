@@ -1,4 +1,4 @@
-package com.consciouscart
+package com.anonymous.consciouscart
 
 import android.os.Build
 import android.os.Bundle
