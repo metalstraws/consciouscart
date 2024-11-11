@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "name": "consciouscart",
+    "slug": "consciouscart",
+    "version": "1.0.0",
+    "plugins": [
+      "expo-font"
+    ],
+    "android": {
+      "package": "com.anonymous.consciouscart"
+    }
+  }
+}
