@@ -4,7 +4,27 @@ import { Ionicons } from "@expo/vector-icons";
 
 export default function App() {
   const [searchText, setSearchText] = useState("");
-  // const [fontsLoaded] = useFonts({
+  const [product, setProduct] = useState(null);
+  
+  const fetchProduct = async (barcode) => {
+    try {
+      const response = await fetch(
+        `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`
+      );
+      const data = await response.json();
+      
+      if (data.status === 1) {
+        setProduct(data.product);
+        console.log(product)
+        // Navigate to product screen with the product data
+        //navigation.navigate('Product', { product: data.product });
+      } else {
+        console.log('Product not found');
+      }
+    } catch (error) {
+      console.error('Error fetching product:', error);
+    }
+  };// const [fontsLoaded] = useFonts({
   //   SourceSerifPro_600SemiBold,
   // });
 
@@ -42,10 +62,16 @@ export default function App() {
         <Ionicons name="search" size={20} color="#666" />
         <TextInput
           style={styles.searchInput}
-          placeholder="Search..."
+          placeholder="Enter barcode..."
           value={searchText}
           onChangeText={setSearchText}
-          clearButtonMode="always" // iOS only
+          clearButtonMode="always"
+          keyboardType="numeric"
+          onSubmitEditing={() => {
+            console.log("Searching for barcode:", searchText);
+            fetchProduct(searchText);
+          }}
+          returnKeyType="search"
         />
         <Ionicons name="arrow-forward" size={20} color="#666" />
       </View>
