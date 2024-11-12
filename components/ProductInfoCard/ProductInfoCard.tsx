@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {View, Text, Image, StyleSheet} from "react-native";
+import {View, Text, Image, StyleSheet, FlatList} from "react-native";
 import CircularProgress from "react-native-circular-progress-indicator";
 
 import fetchData from "@/app/utils/fetchData";
@@ -11,7 +11,7 @@ export default function ProductInfoCard() {
         brands: string;
         packaging: string | null;
         ecoscore_score: number;
-        stores: string;
+        stores: string[];
         image_url: string;
     }
 
@@ -46,11 +46,21 @@ export default function ProductInfoCard() {
                     <Text>{!product?.packaging ? "No packaging information available" : product?.packaging}</Text>
                 </View>
                 <CircularProgress value={Number(product?.ecoscore_score)} duration={2500} strokeColorConfig={[
-    { color: 'red', value: 0 },
-    { color: 'orange', value: 50 },
-    { color: 'green', value: 100 },
-  ]} progressValueColor={'#000'} />
-                <Text>Available Stores: {product?.stores}</Text>
+                    { color: 'red', value: 0 },
+                    { color: 'orange', value: 50 },
+                    { color: 'green', value: 100 },
+                ]} progressValueColor={'#000'} />
+                <View style={styles.storesContainer}>
+                    <Text style={{fontWeight:"600", marginBottom:10}}>Available Stores:</Text>
+                    <FlatList
+                        data={product?.stores} // Use the array directly
+                        renderItem={({item}) => <Text>- {item.trim()}</Text>}
+                        keyExtractor={(item, index) => index.toString()}
+                        style={styles.flatList}
+                        scrollEnabled={false} // Disable scrolling if not needed
+                        nestedScrollEnabled={true}
+                    />
+                </View>
                 <Image style={{
     width: 50,  // or your desired width
     height: 70, // or your desired height
@@ -82,5 +92,15 @@ const styles = StyleSheet.create({
     productInfoSection: {
         justifyContent: "space-evenly",
         alignItems: "center",
+    },
+    storesContainer: {
+        width: '100%',
+        maxHeight: 80, // Limit height
+        marginVertical: 10,
+        justifyContent: "space-evenly",
+        alignItems: "center",
+    }, 
+    flatList: {
+        flexGrow: 0,
     }
 })
