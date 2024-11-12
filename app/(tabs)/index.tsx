@@ -53,9 +53,7 @@ export default function App() {
           <Ionicons name="arrow-forward" size={20} color="#666" />
         </Pressable>
       </View>
-      <View style={styles.shadowProp}>
         <ProductInfoCard />
-      </View>
     </View>
   );
 }
@@ -75,12 +73,5 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
     fontSize: 16,
-  },
-  shadowProp: {
-    shadowColor: '#171717',
-    shadowOffset: {width: 0, height: 3},
-    shadowOpacity: 0.4,
-    shadowRadius: 2,
-    elevation: 5, // Android only
   }
 });
