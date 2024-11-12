@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Text, View, TextInput, StyleSheet, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import DropShadow from "react-native-drop-shadow";
 
 import ProductInfoCard from "@/components/ProductInfoCard/ProductInfoCard";
 
@@ -54,9 +53,9 @@ export default function App() {
           <Ionicons name="arrow-forward" size={20} color="#666" />
         </Pressable>
       </View>
-      <DropShadow style={styles.shadowProp}>
+      <View style={styles.shadowProp}>
         <ProductInfoCard />
-      </DropShadow>
+      </View>
     </View>
   );
 }
@@ -82,5 +81,6 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 3},
     shadowOpacity: 0.4,
     shadowRadius: 2,
+    elevation: 5, // Android only
   }
 });
