@@ -53,18 +53,18 @@ export default function ProductInfoCard() {
                 <View style={styles.storesContainer}>
                     <Text style={{fontWeight:"600", marginBottom:10}}>Available Stores:</Text>
                     <FlatList
-                        data={product?.stores} // Use the array directly
+                        data={product?.stores}
                         renderItem={({item}) => <Text>- {item.trim()}</Text>}
                         keyExtractor={(item, index) => index.toString()}
                         style={styles.flatList}
-                        scrollEnabled={false} // Disable scrolling if not needed
+                        scrollEnabled={false} 
                         nestedScrollEnabled={true}
                     />
                 </View>
                 <Image style={{
-    width: 50,  // or your desired width
-    height: 70, // or your desired height
-    resizeMode: 'contain' // this ensures the image scales properly while maintaining aspect ratio
+    width: 50,
+    height: 70,
+    resizeMode: 'contain'
   }} source={{uri: product?.image_url}} />
             </View>
             )}
