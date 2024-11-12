@@ -12,10 +12,10 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="scannedproducts"
+        name="recentsearches"
         options={{
           title: 'Scanned Products',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="list" color={color} />,
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="history" color={color} />,
         }}
       />
     </Tabs>

@@ -1,12 +1,24 @@
 import React, { useState } from "react";
 import { Text, View, TextInput, StyleSheet, Button } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import {
+  useFonts,
+  SourceSerifPro_600SemiBold,
+} from "@expo-google-fonts/source-serif-pro";
 
 export default function App() {
   const [searchText, setSearchText] = useState("");
   const [product, setProduct] = useState(null);
+  const [fontsLoaded] = useFonts({
+    SourceSerifPro_600SemiBold,
+  });
+  if (!fontsLoaded) {
+    return null;
+  };
+
+
   
-  const fetchProduct = async (barcode) => {
+  const fetchProduct = async (barcode : string) => {
     try {
       const response = await fetch(
         `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`
@@ -24,13 +36,7 @@ export default function App() {
     } catch (error) {
       console.error('Error fetching product:', error);
     }
-  };// const [fontsLoaded] = useFonts({
-  //   SourceSerifPro_600SemiBold,
-  // });
-
-  // if (!fontsLoaded) {
-  //   return null;
-  // }
+  };
 
   return (
     <View style={{flex:1, justifyContent:"center", alignItems:"center", backgroundColor:"#9bce99"}}>
