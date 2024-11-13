@@ -14,7 +14,7 @@ export default function App() {
   });
   const [product, setProduct] = useState(null);
   
-  const fetchProduct = async (barcode) => {
+  const fetchProduct = async (barcode: string) => {
     try {
       const response = await fetch(
         `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`
