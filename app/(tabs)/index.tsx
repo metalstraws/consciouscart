@@ -1,9 +1,17 @@
 import React, { useState } from "react";
-import { Text, View, TextInput, StyleSheet, Button } from "react-native";
+import { Text, View, TextInput, StyleSheet, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import {
+  useFonts,
+  SourceSerifPro_600SemiBold,
+} from "@expo-google-fonts/source-serif-pro";
+import ProductInfoCard from "@/components/ProductInfoCard/ProductInfoCard";
 
 export default function App() {
   const [searchText, setSearchText] = useState("");
+  const [fontsLoaded] = useFonts({
+    SourceSerifPro_600SemiBold,
+  });
   const [product, setProduct] = useState(null);
   
   const fetchProduct = async (barcode) => {
@@ -24,16 +32,21 @@ export default function App() {
     } catch (error) {
       console.error('Error fetching product:', error);
     }
-  };// const [fontsLoaded] = useFonts({
-  //   SourceSerifPro_600SemiBold,
-  // });
+  };
 
-  // if (!fontsLoaded) {
-  //   return null;
-  // }
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
-    <View style={{flex:1, justifyContent:"center", alignItems:"center", backgroundColor:"#9bce99"}}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#9bce99",
+      }}
+    >
       <View
         style={{
           flexDirection: "row",
@@ -73,8 +86,11 @@ export default function App() {
           }}
           returnKeyType="search"
         />
-        <Ionicons name="arrow-forward" size={20} color="#666" />
+        <Pressable>
+          <Ionicons name="arrow-forward" size={20} color="#666" />
+        </Pressable>
       </View>
+      <ProductInfoCard />
     </View>
   );
 }
