@@ -269,3 +269,4 @@ public class LibrariesForLibs extends AbstractExternalDependencyFactory {
     }
 
 }
+
