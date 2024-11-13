@@ -9,6 +9,37 @@ export default function ScannedProduct() {
 
     const [searchText, setSearchText] = useState("");
     const [searchHistory, setSearchHistory] = useState<string[]>([]);
+    const [productName, setProductName] = useState('');
+    const [brands, setBrands] = useState('');
+    const [ecoscore, setEcoscore] = useState();
+    const [ecograde, setEcograde] = useState('');
+
+    const fetchProduct = async (barcode : string) => {
+      try {
+        const response = await fetch(
+          `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`
+        );
+        if (response.ok){
+          const data = await response.json();
+
+          setProductName(data.product.product_name);
+          setBrands(data.product.brands);
+          setEcoscore(data.product.ecoscore_score);
+          setEcograde(data.product.ecoscore_grade);
+
+          console.log('name: ', data.product.product_name);
+          console.log('brands: ', data.product.brands);
+          console.log('eco-score: ', data.product.ecoscore_score);
+          console.log('eco-grade: ', data.product.ecoscore_grade);
+          // Navigate to product screen with the product data
+          //navigation.navigate('Product', { product: data.product });
+        } else {
+          console.log('Product not found');
+        };
+      } catch (error) {
+        console.error('Error fetching product:', error);
+      };
+    };
   
     // Define a function that retrieves the recent searches saved in local device
     const getHistory = async () => {
@@ -66,7 +97,7 @@ export default function ScannedProduct() {
         await AsyncStorage.removeItem('arrayOfSearches');
         console.log('All data cleared');
         setSearchText('');
-  
+      
         setSearchHistory([]);
   
       } catch (error) {
@@ -74,10 +105,9 @@ export default function ScannedProduct() {
       }
     };
   
-    const randomString = 'testing this function';
   
     return (
-      <ScrollView>
+      <View>
         <View
           style={{
             flexDirection: "row",
@@ -115,13 +145,38 @@ export default function ScannedProduct() {
         <View>
           <Button title = "Search" onPress = {() => {storeHistory(searchText)}} />
         </View>
-  
         <View>
           <Button title = "Clear searches" onPress = {() => {clearHistory()}} />
         </View>
-      </ScrollView>
+
+        <ScrollView>
+          {searchHistory.length === 0 ? (
+            <Text>No search history available.</Text>
+          ) : (
+            searchHistory.map((code) => (
+              <View style={{ margin: 10 }}>
+                <Text style={{ color: 'orange', fontSize: 18 }}>
+                  {code}
+                  
+                </Text>
+              </View>
+            ))
+          )}
+        </ScrollView>
+      
+      </View>
     );
 };
+
+// const Box = (props) => {
+//   return (
+//     <View style={{ backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', padding: 5, marginBottom: 5 }}>
+//       <Text style={{ color: 'orange', fontSize: 18 }}>
+//         {props.label}
+//       </Text>
+//     </View>
+//   );
+// };
 
 const styles = StyleSheet.create({
     searchContainer: {
@@ -139,3 +194,27 @@ const styles = StyleSheet.create({
       fontSize: 16,
     },
   });
+
+  // console.log('result from fetchProduct: ', fetchProduct('8445290728791'));
+
+
+//   <View>
+//   <Text style={{ color: 'orange', fontSize: 18 }}>
+//     Product name: {productName}
+//   </Text>
+// </View>
+// <View>
+//   <Text style={{ color: 'orange', fontSize: 18 }}>
+//     Brands: {brands}
+//   </Text>
+// </View>
+// <View>
+//   <Text style={{ color: 'orange', fontSize: 18 }}>
+//     Eco score: {ecoscore}
+//   </Text>
+// </View>
+// <View>
+//   <Text style={{ color: 'orange', fontSize: 18 }}>
+//     Eco grade: {ecograde}
+//   </Text>
+// </View>
