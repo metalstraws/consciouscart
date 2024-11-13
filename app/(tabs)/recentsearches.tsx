@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, TextInput, StyleSheet, ScrollView, Button } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,10 +9,9 @@ export default function ScannedProduct() {
 
     const [searchText, setSearchText] = useState("");
     const [searchHistory, setSearchHistory] = useState<string[]>([]);
-    const [productName, setProductName] = useState('');
-    const [brands, setBrands] = useState('');
-    const [ecoscore, setEcoscore] = useState();
-    const [ecograde, setEcograde] = useState('');
+    const [productDetails, setProductDetails] = useState<
+  { barcode: any; name: any; brands: any; ecoscore: any; ecograde: any }[]
+>([]);
 
     const fetchProduct = async (barcode : string) => {
       try {
@@ -22,17 +21,13 @@ export default function ScannedProduct() {
         if (response.ok){
           const data = await response.json();
 
-          setProductName(data.product.product_name);
-          setBrands(data.product.brands);
-          setEcoscore(data.product.ecoscore_score);
-          setEcograde(data.product.ecoscore_grade);
+          return {
+            name: data.product.product_name,
+            brands: data.product.brands,
+            ecoscore: data.product.ecoscore_score,
+            ecograde: data.product.ecoscore_grade,
+          };
 
-          console.log('name: ', data.product.product_name);
-          console.log('brands: ', data.product.brands);
-          console.log('eco-score: ', data.product.ecoscore_score);
-          console.log('eco-grade: ', data.product.ecoscore_grade);
-          // Navigate to product screen with the product data
-          //navigation.navigate('Product', { product: data.product });
         } else {
           console.log('Product not found');
         };
@@ -40,6 +35,7 @@ export default function ScannedProduct() {
         console.error('Error fetching product:', error);
       };
     };
+
   
     // Define a function that retrieves the recent searches saved in local device
     const getHistory = async () => {
@@ -62,27 +58,47 @@ export default function ScannedProduct() {
         console.log('No search history from previous session', error);
       }
     };
+
+    // Define a function which returns an array of product details for each barcode
+    //  stored in async storage
+    const fetchAllProducts = async () => {
+      const historyArray = await getHistory();
+      const allProductDetails = [];
+      
+      for (let i = 0; i < historyArray.length; i++){
+        const barcode = historyArray[i];
+        const productDetail = await fetchProduct(barcode);
+        if (productDetail) {
+          allProductDetails.push({ ...productDetail, barcode });
+        }
+      }
+      setProductDetails(allProductDetails);
+    };
+
   
     // Define a function that stores recent searches from search bar
     const storeHistory = async (searchedString: string) => {
         try {
-          
           // Call getHistory to first retrieve the array of previous searches
           const historyArray = await getHistory();
-  
           // Append the new search to the array
           const updatedArray = [...historyArray, searchedString];
           console.log('updatedArray (with recent search item): ', updatedArray);
   
           // Update the state for searchHistory to be later implemented in the UI
           setSearchHistory(updatedArray);
-  
           // Turn the updated array back in to string
           const result = JSON.stringify(updatedArray);
-  
           // Update the storage in AsyncStorage
           await AsyncStorage.setItem('arrayOfSearches', result);
-  
+
+          const productDetail = await fetchProduct(searchedString);
+          
+            if (productDetail) {
+                const productWithCode = {...productDetail, barcode: searchedString};
+                setProductDetails((prevProductDetails)=>[...prevProductDetails, productWithCode]);
+            }
+
           // Update the state of search text so that it clears the search bar for better UX
           setSearchText('');
         }
@@ -97,7 +113,8 @@ export default function ScannedProduct() {
         await AsyncStorage.removeItem('arrayOfSearches');
         console.log('All data cleared');
         setSearchText('');
-      
+        
+        setProductDetails([]);
         setSearchHistory([]);
   
       } catch (error) {
@@ -105,6 +122,9 @@ export default function ScannedProduct() {
       }
     };
   
+    useEffect(()=> {
+      fetchAllProducts();
+    }, []);
   
     return (
       <View>
@@ -150,14 +170,22 @@ export default function ScannedProduct() {
         </View>
 
         <ScrollView>
-          {searchHistory.length === 0 ? (
+          {productDetails.length === 0 ? (
             <Text>No search history available.</Text>
           ) : (
-            searchHistory.map((code) => (
+            productDetails.map((productDetails) => (
               <View style={{ margin: 10 }}>
                 <Text style={{ color: 'orange', fontSize: 18 }}>
-                  {code}
-                  
+                  Product name: {productDetails.name}
+                </Text>
+                <Text style={{ color: 'orange', fontSize: 18 }}>
+                  Brands: {productDetails.brands}
+                </Text>
+                <Text style={{ color: 'orange', fontSize: 18 }}>
+                  Ecoscore: {productDetails.ecoscore}
+                </Text>
+                <Text style={{ color: 'orange', fontSize: 18 }}>
+                  Ecograde: {productDetails.ecograde}
                 </Text>
               </View>
             ))
