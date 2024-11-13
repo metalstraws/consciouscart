@@ -28,5 +28,12 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  cameraContainer: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    height: '100%',
+    width: '100%',
   }
 });
