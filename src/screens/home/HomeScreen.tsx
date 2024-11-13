@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ScrollView, View, Text, SafeAreaView } from 'react-native';
+import { View, Text, SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { SearchBar } from '../../components/ui/SearchBar';
 import { ProductCard } from '../../components/product/ProductCard';
@@ -24,7 +24,7 @@ export function HomeScreen() {
         <Ionicons name="cart" size={40} color={theme.colors.surface} />
       </View>
 
-      <ScrollView style={styles.content}>
+      <View style={styles.content}>
         <SearchBar
           value={searchText}
           onChangeText={setSearchText}
@@ -42,7 +42,7 @@ export function HomeScreen() {
         ) : product ? (
           <ProductCard product={product} />
         ) : null}
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }

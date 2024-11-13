@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    alignItems: 'center',
   },
   title: {
     fontSize: theme.typography.sizes.large,
