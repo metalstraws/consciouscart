@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
+import { View, Text, SafeAreaView, Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { SearchBar } from '../../components/ui/SearchBar';
 import { ProductCard } from '../../components/product/ProductCard';
@@ -60,7 +60,11 @@ export function HomeScreen() {
             barcodeScannerSettings={{
               barcodeTypes: ["ean13"],
             }}
+            style={styles.cameraContainer}
           />
+        {scanned && (
+        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
+        )}
         </View>
 
         {loading ? (
