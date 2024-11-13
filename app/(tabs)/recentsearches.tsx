@@ -8,11 +8,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function ScannedProduct() {
 
     const [searchText, setSearchText] = useState("");
+    // state for an array of barcodes that were searched
     const [searchHistory, setSearchHistory] = useState<string[]>([]);
+    // state for an array of objects which have product details
     const [productDetails, setProductDetails] = useState<
   { barcode: any; name: any; brands: any; ecoscore: any; ecograde: any }[]
 >([]);
 
+    // Define a function that takes a barcode and returns an object with product details
+    //  to be called later in fetchAllProducts()
     const fetchProduct = async (barcode : string) => {
       try {
         const response = await fetch(
@@ -37,7 +41,7 @@ export default function ScannedProduct() {
     };
 
   
-    // Define a function that retrieves the recent searches saved in local device
+    // Define a function that retrieves the array of barcodes saved in asyncstorage
     const getHistory = async () => {
       try {
         // Get previous search history
@@ -61,6 +65,7 @@ export default function ScannedProduct() {
 
     // Define a function which returns an array of product details for each barcode
     //  stored in async storage
+    //  to be called in the useEffect hook when the page loads and all product histories are displayed
     const fetchAllProducts = async () => {
       const historyArray = await getHistory();
       const allProductDetails = [];
@@ -74,6 +79,11 @@ export default function ScannedProduct() {
       }
       setProductDetails(allProductDetails);
     };
+
+    // Hook used to display all previously searched products and their details, when the page loads
+    useEffect(()=> {
+      fetchAllProducts();
+    }, []);
 
   
     // Define a function that stores recent searches from search bar
@@ -93,7 +103,6 @@ export default function ScannedProduct() {
           await AsyncStorage.setItem('arrayOfSearches', result);
 
           const productDetail = await fetchProduct(searchedString);
-          
             if (productDetail) {
                 const productWithCode = {...productDetail, barcode: searchedString};
                 setProductDetails((prevProductDetails)=>[...prevProductDetails, productWithCode]);
@@ -121,10 +130,6 @@ export default function ScannedProduct() {
         console.error('Failed to clear AsyncStorage: ', error);
       }
     };
-  
-    useEffect(()=> {
-      fetchAllProducts();
-    }, []);
   
     return (
       <View>
