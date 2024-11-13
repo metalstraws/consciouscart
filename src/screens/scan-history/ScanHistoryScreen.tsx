@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, SafeAreaView, Button } from 'react-native';
+import { ScrollView, View, Text, SafeAreaView, Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { SearchBar } from '../../components/ui/SearchBar';
 import { ProductHistoryList } from '../../components/product/ProductHistoryList';
@@ -21,36 +21,36 @@ export function ScanHistoryScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Scan History</Text>
-        <Ionicons name="list" size={24} color="black" />
-      </View>
-
-      <SearchBar
-        value={searchText}
-        onChangeText={setSearchText}
-        onSubmit={handleSearch}
-        placeholder="Enter barcode to save..."
-      />
-
-      {loading ? (
-        <View style={styles.loadingContainer}>
-          <Text>Loading history...</Text>
+        <View style={styles.header}>
+          <Text style={styles.title}>Scan History</Text>
+          <Ionicons name="list" size={24} color="black" />
         </View>
-      ) : (
-        <>
-          <ProductHistoryList products={productDetails} />
-          {productDetails.length > 0 && (
-            <View style={styles.clearButtonContainer}>
-              <Button 
-                onPress={clearHistory}
-                title="Clear History"
-                color={theme.colors.error}
-              />
-            </View>
-          )}
-        </>
-      )}
+        <SearchBar
+          value={searchText}
+          onChangeText={setSearchText}
+          onSubmit={handleSearch}
+          placeholder="Enter barcode to save..."
+        />
+        <ScrollView>
+        {loading ? (
+          <View style={styles.loadingContainer}>
+            <Text>Loading history...</Text>
+          </View>
+        ) : (
+          <>
+            <ProductHistoryList products={productDetails} />
+            {productDetails.length > 0 && (
+              <View style={styles.clearButtonContainer}>
+                <Button
+                  onPress={clearHistory}
+                  title="Clear History"
+                  color={theme.colors.error}
+                />
+              </View>
+            )}
+          </>
+        )}
+      </ScrollView>
     </SafeAreaView>
   );
 }
