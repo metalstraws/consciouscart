@@ -2,12 +2,15 @@ export const theme = {
   colors: {
     primary: '#9bce99',
     surface: '#ffffff',
-    background: '#f5f5f5',
+    background: '#9bce99',
     text: '#000000',
     textSecondary: '#666666',
     border: '#e0e0e0',
     error: '#ff3b30',
     success: '#34c759',
+    white: '#ffffff',
+    darkGreen: '#234621',
+    mutedGray: 'rgba(35, 70, 33, 0.5)'
   },
   spacing: {
     small: 8,
@@ -31,6 +34,7 @@ export const theme = {
       regular: 'System',
       medium: 'System',
       bold: 'System',
+      title: 'SourceSerifPro_600SemiBold'
     }
   }
 };

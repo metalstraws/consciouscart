@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
   },
   value: {
     fontSize: theme.typography.sizes.medium,
-    color: theme.colors.primary,
+    color: theme.colors.darkGreen,
     fontWeight: '500',
   },
   emptyText: {
@@ -31,5 +31,16 @@ export const styles = StyleSheet.create({
     color: theme.colors.textSecondary,
     fontSize: theme.typography.sizes.medium,
     marginTop: theme.spacing.large,
-  }
+  },
+  gradeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  gradeText: {
+    fontWeight: 'bold',
+    marginRight: 8,
+  },
+  gradeEmoji: {
+    fontSize: 20,
+  },
 });

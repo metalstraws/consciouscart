@@ -2,8 +2,8 @@ export interface ProductHistoryItem {
   barcode: string;
   name: string;
   brands: string;
-  ecoscore: number;
-  ecograde: string;
+  eco_score_value: number;
+  eco_score_grade: string;
 }
 
 export interface ProductHistoryListProps {
