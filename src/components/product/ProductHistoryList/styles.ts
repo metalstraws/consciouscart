@@ -16,15 +16,23 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 1,
   },
+  labelValue: {
+    marginVertical: theme.spacing.small,
+    flexDirection: 'row',
+    gap: theme.spacing.small,
+    flexWrap: 'wrap',
+  },
   label: {
     fontSize: theme.typography.sizes.medium,
+    fontWeight: '600',
     color: theme.colors.text,
-    marginBottom: theme.spacing.small,
+    flexGrow: 0,
   },
   value: {
     fontSize: theme.typography.sizes.medium,
     color: theme.colors.darkGreen,
     fontWeight: '500',
+    flexGrow: 4,
   },
   emptyText: {
     textAlign: 'center',

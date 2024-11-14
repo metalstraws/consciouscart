@@ -41,25 +41,25 @@ export function ProductHistoryList({ products }: ProductHistoryListProps) {
         
         return (
           <View key={`${product.barcode}-${index}`} style={styles.productCard}>
-            <View>
+            <View style={styles.labelValue}>
               <Text style={styles.label}>Product name:</Text>
               <Text style={styles.value}>
                 {product.name?.trim() || 'Unknown product'}
               </Text>
             </View>
-            <View>
+            <View style={styles.labelValue}>
               <Text style={styles.label}>Brands:</Text>
               <Text style={styles.value}>
                 {product.brands?.trim() || 'Unknown brand'}
               </Text>
             </View>
-            <View>
+            <View style={styles.labelValue}>
               <Text style={styles.label}>Ecoscore:</Text>
               <Text style={styles.value}>
                 {formatValue(product.eco_score_value)}
               </Text>
             </View>
-            <View>
+            <View style={styles.labelValue}>
               <Text style={styles.label}>Ecograde:</Text>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text style={[
