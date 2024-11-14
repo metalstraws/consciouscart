@@ -6,7 +6,7 @@ import {
   Button,
   TouchableOpacity,
   StatusBar,
-  Image,
+  Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import {
@@ -90,6 +90,8 @@ export function HomeScreen() {
       if (data) {
         await getProduct(result.data); // This will update the UI
         await addProduct(result.data, data); // Use data directly from API
+      } else {
+        Alert.alert("Barcode not in the database yet, try another barcode.")
       }
     } catch (err) {
       console.error("Scan error:", err);

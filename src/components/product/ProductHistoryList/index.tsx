@@ -7,6 +7,7 @@ const getEcoGradeInfo = (grade: string | null) => {
   if (!grade) return { emoji: '❓', label: 'UNKNOWN', color: '#808080' };
   
   const gradeMap: Record<string, { emoji: string; color: string }> = {
+    'a-plus': { emoji: '😍', color: '#1f7a1f' },    // Dark green
     'a': { emoji: '🌟', color: '#1f7a1f' },    // Dark green
     'b': { emoji: '👍', color: '#4CAF50' },    // Green
     'c': { emoji: '👌', color: '#FFA500' },    // Orange
