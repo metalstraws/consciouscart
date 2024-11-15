@@ -10,20 +10,44 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#9bce99"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "statusBar": {
+        "style": "light",
+        "backgroundColor": "#9bce99"
+      },
+      "allowScreenCapture": true,
+      "hideRuntimeDevMenu": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#9bce99"
+      },
+      "statusBar": {
+        "backgroundColor": "#9bce99",
+        "translucent": true,
+        "style": "light"
+      },
+      "splash": {
+        "backgroundColor": "#9bce99",
+        "resizeMode": "contain",
+        "image": "./assets/images/splash.png"
+      },
+      "softwareKeyboardLayoutMode": "pan",
+      "allowScreenshots": true,
+      "hideRuntimeDevMenu": true,
+      "navigationBar": {
+        "backgroundColor": "#9bce99",
+        "visible": true
+      },
+      "package": "com.anonymous.conciouscart"
     },
     "web": {
       "bundler": "metro",
-      "output": "static",
+      "output": "single",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
@@ -33,6 +57,9 @@
     "experiments": {
       "typedRoutes": true
     },
-    "newArchEnabled": true
+    "newArchEnabled": true,
+    "developmentClient": {
+      "silentLaunch": true
+    }
   }
 }

@@ -5,28 +5,38 @@ import { theme } from '../../src/constants/theme';
 export default function TabLayout() {
   return (
     <Tabs 
-      screenOptions={{
-        tabBarActiveTintColor: theme.colors.primary,
+      screenOptions={({ route }) => ({
+        tabBarActiveTintColor: theme.colors.darkGreen,
+        tabBarInactiveTintColor: 'rgba(35, 70, 33, 0.5)',
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: theme.colors.surface,
-          borderTopColor: theme.colors.border,
-        }
-      }}
+          shadowColor: 'transparent',
+          shadowOffset: {
+            width: 0,
+            height: 0
+          },
+          shadowOpacity: 0,
+          shadowRadius: 0,
+          elevation: 0,
+          borderTopWidth: 0,
+          backgroundColor: theme.colors.background,
+          borderTopColor: theme.colors.background,
+        },
+        tabBarHideOnKeyboard: true,
+        tabBarIcon: ({ color }) => {
+          if (route.name === 'index') {
+            return <TabBarIcon name="home" color={color} />;
+          }
+          return <TabBarIcon name="list" color={color} />;
+        },
+        title: route.name === 'index' ? 'Home' : 'History',
+      })}
     >
-      <Tabs.Screen
+      <Tabs.Screen 
         name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />
-        }}
       />
-      <Tabs.Screen
+      <Tabs.Screen 
         name="scan-history"
-        options={{
-          title: 'History',
-          tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />
-        }}
       />
     </Tabs>
   );

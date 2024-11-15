@@ -29,6 +29,11 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
     marginBottom: theme.spacing.small,
   },
+  value: {
+    fontSize: theme.typography.sizes.medium,
+    color: theme.colors.darkGreen,
+    fontWeight: '500',
+  },
   storesContainer: {
     width: '100%',
     maxHeight: 80,
