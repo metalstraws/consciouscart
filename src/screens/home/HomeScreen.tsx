@@ -94,6 +94,7 @@ export function HomeScreen() {
         Alert.alert("Barcode not in the database yet, try another barcode.")
       }
     } catch (err) {
+      Alert.alert("Barcode not in the database yet, try another barcode.")
       console.error("Scan error:", err);
     }
   };
@@ -112,8 +113,11 @@ export function HomeScreen() {
           await addProduct(trimmedText, data); // Use data directly from API
           console.log("DEBUG: After addProduct");
           setSearchText('');
+        } else {
+          Alert.alert("Barcode not in the database yet, try another barcode.")
         }
       } catch (err) {
+        Alert.alert("Barcode not in the database yet, try another barcode.")
         console.error("Search error:", err);
       }
     }
