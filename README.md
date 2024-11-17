@@ -1,50 +1,63 @@
-# Welcome to your Expo app 👋
+# Conscious Cart
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+![alt text](assets\images\logo.png)
 
-## Get started
+Conscious Cart is a React Native application designed to help you make eco-friendly choices while shopping. Our app provides information on sustainable products, helping you reduce your environmental impact.
 
-1. Install dependencies
+## Features
 
+- **Product Scanning**: Scan barcodes to get information on the eco-friendliness of products.
+- **Eco Ratings**: View ratings based on sustainability, packaging, and overall environmental impact.
+- **Product Recommendations**: Get suggestions for more sustainable alternatives (still to come)
+
+## Installation
+
+To get started with Conscious Cart, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/metalstraws/consciouscart.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd conscious-cart
+   ```
+3. Install dependencies:
    ```bash
    npm install
    ```
-
-2. Start the app
-
+4. Run the app:
    ```bash
-    npx expo start
+   npm start
    ```
 
-In the output, you'll find options to open the app in a
+## Contributing
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+We welcome contributions from the community. To contribute, please follow these steps:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Make your changes and commit them:
+   ```bash
+   git commit -m "Description of changes"
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature-name
+   ```
+5. Open a pull request on GitHub.
 
-## Get a fresh project
+## License
 
-When you're ready, run:
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-```bash
-npm run reset-project
-```
+## Contact
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+For any questions or feedback, please contact us on GitHub
 
-## Learn more
+---
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Thank you for using Conscious Cart and making a positive impact on the environment!
