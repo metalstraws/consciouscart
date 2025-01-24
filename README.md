@@ -1,6 +1,4 @@
-# Conscious Cart
-
-![alt text](assets\images\logo.png)
+![Conscious Cart](assets/images/logo.png)
 
 Conscious Cart is a React Native application designed to help you make eco-friendly choices while shopping. Our app provides information on sustainable products, helping you reduce your environmental impact.
 
